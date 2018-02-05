@@ -3,12 +3,18 @@ var express = require('express'),
   port = process.env.PORT || 3000,
   mongoose = require('mongoose'),
   Task = require('./api/models/todoListModel'), //created model loading here
+  Location = require('./api/models/locationModel'),
   bodyParser = require('body-parser');
   
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-// mongoose.connect('mongodb://localhost/Tododb'); 
 
+
+
+// configuration =================
+// connect to mongoDB database localy
+// testing db connection
+// note: remeber always to turn on mongo localy (sudo service mongod start) on ubuntu
 var db = mongoose.connect('mongodb://localhost:27017/testDb', function(error)
 {
     if(error) console.log(error);
