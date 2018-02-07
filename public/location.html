@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+    <meta charset="utf-8">
+    <title> my Geolocation</title>
+    <script type="text/javascript">
+        // send the position from where i am , need html5
+        function sendPosition() {
+            // var idhome = document.getElementById("idhome").value;
+
+            // positions obtained from the navigator
+            var current_latitude = document.getElementById("latitude").value;
+            var current_longitude = document.getElementById("longitude").value;
+
+            if (latitude != "" && longitude != "") {
+                //jqueryn the data, 
+                $.post('http://localhost:3000/save_location', // change this for the online server
+                    {
+                        latitude: current_latitude,
+                        longitude: current_longitude,
+                    },
+                    function (data, status) {
+                        alert("lati: " + data.latitude + data.longitude + "\nStatus: " + status);
+                    });
+                alert("Datos enviados al Servidor");
+                location.reload();
+            }
+            else {
+                alert("Debe tener todos los campos llenos");
+            }
+        }
+
+        function getPosition() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+                    document.getElementById("latitude").value = latitude;
+                    document.getElementById("longitude").value = longitude;
+                });
+            }
+            else {
+                alert("Sorry, your browser does not support HTML5 geolocation.");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <p>
+            <label>Latitud: </label>
+            <input id="latitude" type="text" name="latitude" </input>
+            <p>
+                <label>Longitud: </label>
+                <input id="longitude" type="text" name="longitude" </input>
+                <p>
+    </div>
+    <button type="button" onclick="getPosition();">Get Lat & Long</button>
+    <button type="button" onclick="sendPosition();">Send</button>
+    <p>
+        <label id="result"></label>
+</body>
+
+</html>

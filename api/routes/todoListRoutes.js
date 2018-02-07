@@ -16,8 +16,10 @@ module.exports = function (app) {
     //simple test call 
     app.get('/test1', (req, res) => {
         res.send('Hello World')
-    })
+    });
 
+    //saves the coordinates 
     app.route('/save_location')
         .post(location.create_a_location);
+
 };
