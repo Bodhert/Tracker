@@ -20,6 +20,11 @@ module.exports = function (app) {
 
     //saves the coordinates 
     app.route('/save_location')
-        .post(location.create_a_location);
+        .post(location.create_a_location); //create location 
+        
+    
+    //brings all the locations
+    app.route('/bring_all_locations')
+    .get(location.lists_all_locations); // list all the locations stored
 
 };
