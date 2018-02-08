@@ -86,9 +86,12 @@
             var infoWindow = new google.maps.InfoWindow({ map: map });
 
             //geting all the position stored in the db
-            $.get("http://localhost:3000//bring_all_locations", function (data) {
+            $.get("http://localhost:3000/bring_all_locations", function (data) {
                 alert("Data Loaded: " + data);
             });
+
+            // how to store de json somewhere, how to iterate a json
+            
         }
 
         function handleLocationError(browserHasGeolocation, infoWindow, pos) {
