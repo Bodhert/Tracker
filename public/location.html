@@ -37,7 +37,7 @@
             var current_latitude = document.getElementById("latitude").value;
             var current_longitude = document.getElementById("longitude").value;
 
-            if (latitude != "" && longitude != "") {
+            if (latitude  && longitude ) {
                 //jqueryn the data, 
                 $.post('http://localhost:3000/save_location', // change this for the online server
                     {
@@ -92,10 +92,9 @@
             //if i change the schema, I have to change how to manage the data
             $.get("http://localhost:3000/bring_all_locations", function (data) {
                 // alert("Data Loaded: " + data); //uncomment this line for debbuging
+                // I have problems if something is null
                 for (var key in data) {
-                    if (
-                        typeof data[key].latitude != 'undefined' &&
-                        typeof data[key].longitude != 'undefined') {
+                    if (!(!data[key].latitude  && !data[key].longitude) ) { // checking for non existent values
                             
                         var coordinates =  {lat: data[key].latitude, lng: data[key].longitude};
                         var marker = new google.maps.Marker({
