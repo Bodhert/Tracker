@@ -29,39 +29,36 @@
     </style>
 
     <script type="text/javascript">
-        // send the position from where i am , need html5
-        function sendPosition() {
-            // var idhome = document.getElementById("idhome").value;
 
-            // positions obtained from the navigator
-            var current_latitude = document.getElementById("latitude").value;
-            var current_longitude = document.getElementById("longitude").value;
-
-            if (latitude  && longitude ) {
-                //jqueryn the data, 
-                $.post('http://localhost:3000/save_location', // change this for the online server
-                    {
-                        latitude: current_latitude,
-                        longitude: current_longitude,
-                    },
-                    function (data, status) {
-                        alert("lati: " + data.latitude + "long" + data.longitude + "\nStatus: " + status);
-                    });
-                alert("Datos enviados al Servidor");
-                location.reload();
-            }
-            else {
-                alert("Debe tener todos los campos llenos");
-            }
+        var call
+        function tracking()
+        {
+            call = setInterval(getPosition,5000);
         }
-
+        //gets the position and send it to the db
         function getPosition() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
-                    var latitude = position.coords.latitude;
-                    var longitude = position.coords.longitude;
-                    document.getElementById("latitude").value = latitude;
-                    document.getElementById("longitude").value = longitude;
+                    var current_latitude = position.coords.latitude;
+                    var current_longitude = position.coords.longitude;
+                    document.getElementById("latitude").value = current_latitude;
+                    document.getElementById("longitude").value = current_longitude;
+                    if (current_latitude && current_longitude) { // are not null
+                        //jqueryn the data, 
+                        $.post('http://localhost:3000/save_location', // change this for the online server
+                            {
+                                latitude: current_latitude,
+                                longitude: current_longitude,
+                            },
+                            function (data, status) {
+                                // alert("lati: " + data.latitude + " long:" + data.longitude + "\nStatus: " + status);
+                            });
+                        // alert("Datos enviados al Servidor");
+                        // location.reload();
+                    }
+                    else {
+                        alert("no se han obtenido las coordenadas");
+                    }
                 });
             }
             else {
@@ -94,9 +91,9 @@
                 // alert("Data Loaded: " + data); //uncomment this line for debbuging
                 // I have problems if something is null
                 for (var key in data) {
-                    if (!(!data[key].latitude  && !data[key].longitude) ) { // checking for non existent values
-                            
-                        var coordinates =  {lat: data[key].latitude, lng: data[key].longitude};
+                    if (data[key].latitude && data[key].longitude) { // checking for non existent values
+
+                        var coordinates = { lat: data[key].latitude, lng: data[key].longitude };
                         var marker = new google.maps.Marker({
                             position: coordinates,
                             map: map,
@@ -106,15 +103,6 @@
                     }
                 }
             });
-           
-
-
-
-
-
-
-            // how to store de json somewhere, how to iterate a json
-
         }
 
         function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -138,8 +126,8 @@
                 <input id="longitude" type="text" name="longitude" </input>
                 <p>
     </div>
-    <button type="button" onclick="getPosition();">Get Lat & Long</button>
-    <button type="button" onclick="sendPosition();">Send</button>
+    <button type="button" onclick="getPosition()">Get Lat & Long</button>
+    <button type="button" onclick="tracking()">Start Tracking</button>  
     <p>
         <label id="result"></label>
 
