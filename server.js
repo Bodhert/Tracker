@@ -4,9 +4,12 @@ var express = require('express'),
   mongoose = require('mongoose'),
   Task = require('./api/models/todoListModel'), //created model loading here
   Location = require('./api/models/locationModel'),
+  Usert = require('./api/models/userModel');
   bodyParser = require('body-parser'),
   morgan = require('morgan'),
-  methodOverride = require('method-override');
+  methodOverride = require('method-override'),
+  session = require('express-session'),
+  MongoStore = require('connect-mongo')(session);
 
 // mongoose instance connection url connection
 
@@ -34,12 +37,27 @@ mongoose.Promise = global.Promise;
 // connect to mongoDB database localy
 // testing db connection
 // note: remeber always to turn on mongo localy (sudo service mongod start) on ubuntu
-var db = mongoose.connect('mongodb://localhost:27017/testDb', function (error) {
-  if (error) console.log(error);
+
+mongoose.connect('mongodb://localhost/testForAuth');
+var db = mongoose.connection;
+
+//handle mongo error
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+  // we're connected!
   console.log("connection with the mongo db successful");
+
 });
 
 
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: db
+  })
+}));
 
 
 var routes = require('./api/routes/todoListRoutes'); //importing route

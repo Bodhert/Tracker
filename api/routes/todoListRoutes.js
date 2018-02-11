@@ -1,7 +1,7 @@
 module.exports = function (app) {
     var todoList = require('../controllers/todoListController');
     var location = require('../controllers/LocationController');
-
+    var user = require('../controllers/userController');
     // todoList Routes
     app.route('/tasks')
         .get(todoList.list_all_tasks)
@@ -21,10 +21,14 @@ module.exports = function (app) {
     //saves the coordinates 
     app.route('/save_location')
         .post(location.create_a_location); //create location 
-        
-    
+
+
     //brings all the locations
     app.route('/bring_all_locations')
-    .get(location.lists_all_locations); // list all the locations stored
+        .get(location.lists_all_locations); // list all the locations stored
+
+    //creates users or log them in , otherwise fails
+    app.route('/session')
+        .post(user.create_user);
 
 };
