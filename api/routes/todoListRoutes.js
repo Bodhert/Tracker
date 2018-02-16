@@ -18,6 +18,8 @@ module.exports = function (app) {
         res.send('Hello World')
     });
 
+    app.route('/gps')
+        .get(location.send_page);
     //saves the coordinates 
     app.route('/save_location')
         .post(location.create_a_location); //create location 
@@ -31,5 +33,15 @@ module.exports = function (app) {
     app.route('/')
         .get(user.send_page)
         .post(user.create_user);
+
+    //gets the profile of the user
+    app.route('/_profile')
+        .get(user._profile);
+    
+    //log you out of the session
+    app.route('/logout')
+        .get(user.logout);
+
+    
 
 };

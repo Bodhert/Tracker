@@ -18,3 +18,11 @@ exports.lists_all_locations = function (req, res) {
         res.send(locations)
     });
 };
+
+exports.send_page = function (req, res) {
+    // res.render(__dirname + '/public/login_register/login_register');
+    // I dont know if this is good or bad, cause is vero slow firts to charge
+    res.render('../public/location.html');
+    console.log(req.session.userId);
+    
+};
