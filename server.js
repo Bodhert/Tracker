@@ -38,7 +38,10 @@ mongoose.Promise = global.Promise;
 // testing db connection
 // note: remeber always to turn on mongo localy (sudo service mongod start) on ubuntu
 
-mongoose.connect('mongodb://localhost/testDb');
+// var current_db = 'mongodb://localhost/testDb'; // for local test
+var current_db = 'mongodb://bodhert:123456@ds239368.mlab.com:39368/tracker'; //for deployment
+
+mongoose.connect(current_db);
 var db = mongoose.connection;
 
 //handle mongo error

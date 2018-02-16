@@ -45,7 +45,7 @@
                     document.getElementById("longitude").value = current_longitude;
                     if (current_latitude && current_longitude) { // are not null
                         //jqueryn the data, 
-                        $.post('http://localhost:3000/save_location', // change this for the online server
+                        $.post('/save_location', // change this for the online server
                             {
                                 latitude: current_latitude,
                                 longitude: current_longitude,
@@ -89,7 +89,7 @@
             //geting all the position stored in the db and putting them on the map
 
             //if i change the schema, I have to change how to manage the data
-            $.get("http://localhost:3000/bring_all_locations", function (data) {
+            $.get("/bring_all_locations", function (data) {
                 // alert("Data Loaded: " + data); //uncomment this line for debbuging
                 // I have problems if something is null
                 for (var key in data) {
