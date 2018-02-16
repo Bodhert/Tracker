@@ -27,9 +27,9 @@ app.set('view engine', 'html');
 
 
 //calling the page that contains the script for geting latitude and longitud
-app.get('/gps', function (req, res) {
-  res.render(__dirname + '/public/location.html');
-});
+// app.get('/', function (req, res) {
+//   res.render(__dirname + '/public/login_register/login_register');
+// });
 
 
 mongoose.Promise = global.Promise;
@@ -38,7 +38,7 @@ mongoose.Promise = global.Promise;
 // testing db connection
 // note: remeber always to turn on mongo localy (sudo service mongod start) on ubuntu
 
-mongoose.connect('mongodb://localhost/testForAuth');
+mongoose.connect('mongodb://localhost/testDb');
 var db = mongoose.connection;
 
 //handle mongo error

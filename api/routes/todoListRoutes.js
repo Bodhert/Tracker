@@ -28,7 +28,8 @@ module.exports = function (app) {
         .get(location.lists_all_locations); // list all the locations stored
 
     //creates users or log them in , otherwise fails
-    app.route('/session')
+    app.route('/')
+        .get(user.send_page)
         .post(user.create_user);
 
 };
