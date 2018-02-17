@@ -35,6 +35,8 @@
 
         function tracking()
         {
+            alert("hello user: " + current_user + " trackin in progress");
+            alert("remember to refres your page for see your positions");
             call = setInterval(getPosition,5000);
         }
         //gets the position and send it to the db
@@ -54,9 +56,9 @@
                                 longitude: current_longitude,
                             },
                             function (data, status) {
-                                 alert("lati: " + data.latitude + " long:" + data.longitude + "\nStatus: " + status);
+                                //  alert("lati: " + data.latitude + " long:" + data.longitude + "\nStatus: " + status);
                             });
-                         alert("Datos enviados al Servidor");
+                        //  alert("Datos enviados al Servidor");
                         // location.reload();
                     }
                     else {
@@ -73,7 +75,7 @@
         function call_current_user()
         {
             $.get("/current_user", function (data) {
-                alert("Data Loaded: " + data); //uncomment this line for debbuging
+                // alert("Data Loaded: " + data); //uncomment this line for debbuging
                 if(data) current_user = data;
             });
         }
@@ -105,7 +107,7 @@
 
             //if i change the schema, I have to change how to manage the data
             $.get("/gps/" + current_user, function (data) {
-                alert("Data Loaded: " + data); //uncomment this line for debbuging
+                // alert("Data Loaded: " + data); //uncomment this line for debbuging
                 // I have problems if something is null
                 for (var key in data) {
                     if (data[key].latitude && data[key].longitude) { // checking for non existent values
@@ -132,7 +134,7 @@
           function call_current_user()
         {
             $.get("/current_user", function (data) {
-                alert("Data Loaded: " + data); //uncomment this line for debbuging
+                // alert("Data Loaded: " + data); //uncomment this line for debbuging
                 if(data) current_user = data;
             });
         }
