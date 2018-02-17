@@ -97,6 +97,8 @@
         // this function has a lot of work, it would be good if i manage to break
         // it down in smaller funtions
         function initMap() {
+            call_current_user();
+
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: 6.512152, lng: -75.617489 },
                 zoom: 6
@@ -134,8 +136,8 @@
           function call_current_user()
         {
             $.get("/current_user", function (data) {
-                // alert("Data Loaded: " + data); //uncomment this line for debbuging
-                if(data) current_user = data;
+                alert("Data Loaded: " + data); //uncomment this line for debbuging
+                if(data) return current_user = data;
             });
         }
 
