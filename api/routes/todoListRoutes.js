@@ -20,6 +20,10 @@ module.exports = function (app) {
 
     app.route('/gps')
         .get(location.send_page);
+
+    app.route('/gps/:username')
+        .get(location.bring_user_locations);
+
     //saves the coordinates 
     app.route('/save_location')
         .post(location.create_a_location); //create location 
@@ -42,6 +46,9 @@ module.exports = function (app) {
     app.route('/logout')
         .get(user.logout);
 
+    //brings the name of the current user
+    app.route('/current_user')
+        .get(user.current_user);
     
 
 };

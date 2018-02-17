@@ -19,10 +19,19 @@ exports.lists_all_locations = function (req, res) {
     });
 };
 
+//bring all the locations of one user
+exports.bring_user_locations = function (req, res) {
+    Location.find({username: req.params.username}, function (err, locations) {
+        if (err)
+            res.send(err);
+        res.json(locations);
+    });
+};
+
 exports.send_page = function (req, res) {
     // res.render(__dirname + '/public/login_register/login_register');
     // I dont know if this is good or bad, cause is vero slow firts to charge
     res.render('../public/location.html');
-    console.log(req.session.userId);
+    // console.log(req.session.userId);
     
 };

@@ -30,7 +30,9 @@
 
     <script type="text/javascript">
 
-        var call
+        var call;
+        var current_user; call_current_user();
+
         function tracking()
         {
             call = setInterval(getPosition,5000);
@@ -43,11 +45,11 @@
                     var current_longitude = position.coords.longitude;
                     document.getElementById("latitude").value = current_latitude;
                     document.getElementById("longitude").value = current_longitude;
-                    if (current_latitude && current_longitude) { // are not null
+                    if (current_latitude && current_longitude && current_user) { // are not null
                         //jqueryn the data, 
                         $.post('/save_location', // change this for the online server
                             {
-                                //user_id
+                                username: current_user,
                                 latitude: current_latitude,
                                 longitude: current_longitude,
                             },
@@ -66,11 +68,23 @@
                 alert("Sorry, your browser does not support HTML5 geolocation.");
             }
         }
+
+
+        function call_current_user()
+        {
+            $.get("/current_user", function (data) {
+                alert("Data Loaded: " + data); //uncomment this line for debbuging
+                if(data) current_user = data;
+            });
+        }
     </script>
 
 
     <div id="map"></div>
     <script>
+
+        // this method could be optimezed, just calling it once!!!
+         var current_user; call_current_user();
         // Note: This example requires that you consent to location sharing when
         // prompted by your browser. If you see the error "The Geolocation service
         // failed.", it means you probably did not give permission for the browser to
@@ -90,8 +104,8 @@
             //geting all the position stored in the db and putting them on the map
 
             //if i change the schema, I have to change how to manage the data
-            $.get("/bring_all_locations", function (data) {
-                // alert("Data Loaded: " + data); //uncomment this line for debbuging
+            $.get("/gps/" + current_user, function (data) {
+                alert("Data Loaded: " + data); //uncomment this line for debbuging
                 // I have problems if something is null
                 for (var key in data) {
                     if (data[key].latitude && data[key].longitude) { // checking for non existent values
@@ -114,6 +128,15 @@
                 'Error: The Geolocation service failed.' :
                 'Error: Your browser doesn\'t support geolocation.');
         }
+
+          function call_current_user()
+        {
+            $.get("/current_user", function (data) {
+                alert("Data Loaded: " + data); //uncomment this line for debbuging
+                if(data) current_user = data;
+            });
+        }
+
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKuSDdOXG3cfDCaYJTFWJaQ4K-RWItMo8&callback=initMap">
     </script>

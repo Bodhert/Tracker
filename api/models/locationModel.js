@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 // model of dates to store in the db
 var LocationSchema = new Schema(
     {
+        username: String,
         latitude: Number,
         longitude: Number,
         Created_date:

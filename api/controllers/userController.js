@@ -99,3 +99,27 @@ exports.logout = function (req, res, next) {
     }
 };
 
+exports.current_user = function (req, res, next) 
+{
+    User.findById(req.session.userId)
+        .exec(function (error, user) {
+            if (error) {
+                return next(error);
+            }
+            else 
+            {
+                if (user === null) 
+                {
+                    var err = new Error('we could not catch the user');
+                    err.status = 400;
+                    res.send(null);
+                    console.log("nullo");
+                }
+                else 
+                {
+                    console.log(user.username);
+                    res.send(user.username);
+                }
+            }
+        });
+};
