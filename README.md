@@ -21,7 +21,7 @@ linux enviroment , specially ubuntu 16.04.
 ### Design
 
 ## Data
-Everything that is going to be store is in schema format , example : \
+Everything that is going to be store is in schema format , example : 
 ```
    {
         username: String,
@@ -36,15 +36,15 @@ Everything that is going to be store is in schema format , example : \
 ```
 
 ## Web services
-web service: get method for testing the api('/test1')
-web service: loads the html related to the gps frontend('/gps')
-web service: get method for bringing the location for the specified user('/gps/:username')
-web service: post method for storing current location('/save_location')
-web service: get method that brings all the locations in the db ('/bring_all_locations')
-web service: ('/')
-web service: post,get method that creates or brings the profile('/_profile')
-web service: delete current session (cookie)('/logout')
-web service: brings the name of the user('/current_user')
+* web service: get method for testing the api('/test1')
+* web service: loads the html related to the gps frontend('/gps')
+* web service: get method for bringing the location for the specified user('/gps/:username')
+* web service: post method for storing current location('/save_location')
+* web service: get method that brings all the locations in the db ('/bring_all_locations')
+* web service: ('/')
+* web service: post,get method that creates or brings the profile('/_profile')
+* web service: delete current session (cookie)('/logout')
+* web service: brings the name of the user('/current_user')
 
 ### Installing
 
