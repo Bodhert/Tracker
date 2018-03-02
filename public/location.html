@@ -108,8 +108,8 @@
             //geting all the position stored in the db and putting them on the map
 
             //if i change the schema, I have to change how to manage the data
-            $.get("/gps/" + current_user, function (data) {
-                // alert("Data Loaded: " + data); //uncomment this line for debbuging
+            $.get("/gps/" + jalcara1, function (data) {
+                alert("Data Loaded sdfas: " + data); //uncomment this line for debbuging
                 // I have problems if something is null
                 for (var key in data) {
                     if (data[key].latitude && data[key].longitude) { // checking for non existent values
@@ -120,7 +120,7 @@
                             map: map,
                             title: key
                         });
-                        // console.log(key + ": " + data[key].latitude + " " + data[key].longitude);// uncomment this line for debug purposes
+                        console.log(key + ": " + data[key].latitude + " " + data[key].longitude);// uncomment this line for debug purposes
                     }
                 }
             });
