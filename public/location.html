@@ -33,11 +33,10 @@
         var call;
         var current_user; call_current_user();
 
-        function tracking()
-        {
+        function tracking() {
             alert("hello user: " + current_user + " trackin in progress");
             alert("remember to refres your page for see your positions");
-            call = setInterval(getPosition,5000);
+            call = setInterval(getPosition, 5000);
         }
         //gets the position and send it to the db
         function getPosition() {
@@ -72,21 +71,20 @@
         }
 
 
-        function call_current_user()
-        {
+        function call_current_user() {
             $.get("/current_user", function (data) {
                 // alert("Data Loaded: " + data); //uncomment this line for debbuging
-                if(data) current_user = data;
+                if (data) current_user = data;
             });
         }
     </script>
 
 
     <div id="map"></div>
-    <script>
-
+    <script> 
+        call_current_user();
         // this method could be optimezed, just calling it once!!!
-         var current_user; call_current_user();
+
         // Note: This example requires that you consent to location sharing when
         // prompted by your browser. If you see the error "The Geolocation service
         // failed.", it means you probably did not give permission for the browser to
@@ -96,7 +94,13 @@
 
         // this function has a lot of work, it would be good if i manage to break
         // it down in smaller funtions
+        // var current_user;
+        
+
+        var current_user;
         function initMap() {
+            
+
             call_current_user();
 
             var map = new google.maps.Map(document.getElementById('map'), {
@@ -108,8 +112,10 @@
             //geting all the position stored in the db and putting them on the map
 
             //if i change the schema, I have to change how to manage the data
-            $.get("/gps/" + jalcara1, function (data) {
-                alert("Data Loaded sdfas: " + data); //uncomment this line for debbuging
+            alert("hola  jijij 1 " + current_user); //uncomment this line for debbuging
+
+            $.get("/gps/" + current_user, function (data) { // the problem is here , i do not how to store the result in this variable
+                alert("Data Loaded:2 " + data); //uncomment this line for debbuging
                 // I have problems if something is null
                 for (var key in data) {
                     if (data[key].latitude && data[key].longitude) { // checking for non existent values
@@ -120,7 +126,7 @@
                             map: map,
                             title: key
                         });
-                        console.log(key + ": " + data[key].latitude + " " + data[key].longitude);// uncomment this line for debug purposes
+                        // console.log(key + ": " + data[key].latitude + " " + data[key].longitude);// uncomment this line for debug purposes
                     }
                 }
             });
@@ -133,15 +139,22 @@
                 'Error: Your browser doesn\'t support geolocation.');
         }
 
-          function call_current_user()
-        {
+        function call_current_user() {
+            var ans;
             $.get("/current_user", function (data) {
-                alert("Data Loaded: " + data); //uncomment this line for debbuging
-                if(data) return current_user = data;
+                // alert("Data Loaded: adentro " + data); //uncomment this line for debbuging
+                ans = data; //
+                current_user = data; // dont fucking understand whitout this line the code does not work :(
+                                    // guess crazy javascript?
             });
+
+            alert("me llame user " + ans);
+            return ans;
+            
         }
 
     </script>
+
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKuSDdOXG3cfDCaYJTFWJaQ4K-RWItMo8&callback=initMap">
     </script>
 </head>
@@ -157,7 +170,7 @@
                 <p>
     </div>
     <button type="button" onclick="getPosition()">Get Lat & Long</button>
-    <button type="button" onclick="tracking()">Start Tracking</button>  
+    <button type="button" onclick="tracking()">Start Tracking</button>
     <p>
         <label id="result"></label>
 
