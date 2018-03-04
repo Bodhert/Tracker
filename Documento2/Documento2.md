@@ -21,7 +21,7 @@
 
 
 
-1. Análisis: Mediante escenarios y/o propuesta en marco de referencia. 
+1. Análisis: Mediante escenarios y/o propuesta en marco de referencia.
 
 DISPONIBILIDAD
 
@@ -67,15 +67,16 @@ una analogía para dar mejor explicación al modelo: Una que me gusta mucho es l
 la razón es que nos permite separar los componentes de nuestra aplicación dependiendo de la responsabilidad que tienen, esto significa que cuando hacemos un cambio en alguna parte de nuestro código, esto no afecte otra parte del mismo. Por ejemplo, si modificamos nuestra Base de Datos, sólo deberíamos modificar el modelo que es quién se encarga de los datos y el resto de la aplicación debería permanecer intacta. Esto respeta el principio de la responsabilidad única. Es decir, una parte de tu código no debe de saber qué es lo que hace toda la aplicación, sólo debe de tener una responsabilidad
 
 b) las 3 seleccionadas son: Failover, Failback y Continuous Maintenance.
-Failover: durante escenarios de carga pesada, la capacidad del sistema para operar en caso de falla de un nodo o componente al cambiar transparentemente a otro componente de respaldo a menudo se conoce como failover
 
-Failback: ocurre después del failover, donde el nodo primario o el sitio primario se recupera de la falla y estará completamente operativo.Esto requiere establecer un punto de falla y copiar los datos que se han creado después del punto de falla del nodo secundario o de respaldo.
+* Failover: durante escenarios de carga pesada, la capacidad del sistema para operar en caso de falla de un nodo o componente al cambiar transparentemente a otro componente de respaldo a menudo se conoce como failover
 
-Replicación: esto implica copiar los datos del nodo primario a todos sus nodos de respaldo y en espera para que sea fácil cambiarlos en caso de conmutación por error. La replicación es una práctica generalmente seguida en sistemas de almacenamiento, servidores de bases de datos y en casos de configuraciones de aplicaciones.
+* Failback: ocurre después del failover, donde el nodo primario o el sitio primario se recupera de la falla y estará completamente operativo.Esto requiere establecer un punto de falla y copiar los datos que se han creado después del punto de falla del nodo secundario o de respaldo.
 
-Virtualization: las interrupciones causadas por el hardware y el sistema operativo se pueden reducir mediante el uso de la virtualización. La virtualización ofrece muchas ventajas, como la distribución de carga y el enrutamiento de solicitudes, y permite a los administradores del sistema mejorar el hardware subyacente de manera ininterrumpida; todo esto tendrá un impacto positivo en la disponibilidad general.
+* Replicación: esto implica copiar los datos del nodo primario a todos sus nodos de respaldo y en espera para que sea fácil cambiarlos en caso de conmutación por error. La replicación es una práctica generalmente seguida en sistemas de almacenamiento, servidores de bases de datos y en casos de configuraciones de aplicaciones.
 
-Continuous maintenance: las actividades regulares de mantenimiento para los componentes de hardware son clave para mantener la infraestructura en buen estado de salud. El mantenimiento regular aumenta la confiabilidad del hardware, asegura operaciones confiables y extiende la vida útil general del hardware. A largo plazo, el mantenimiento reduce el costo total de propiedad (TCO) del sistema. Las actividades de mantenimiento de hardware incluyen servicios regulares de servidores, limpieza de componentes, realización de copias de seguridad de discos y bases de datos, actualización del hardware de forma periódica en función de las necesidades comerciales, etc. existen tres tipos de mantenimiento: el preventivo, el correctivo y mantenimiento perfecto.
+* Virtualization: las interrupciones causadas por el hardware y el sistema operativo se pueden reducir mediante el uso de la virtualización. La virtualización ofrece muchas ventajas, como la distribución de carga y el enrutamiento de solicitudes, y permite a los administradores del sistema mejorar el hardware subyacente de manera ininterrumpida; todo esto tendrá un impacto positivo en la disponibilidad general.
+
+* Continuous maintenance: las actividades regulares de mantenimiento para los componentes de hardware son clave para mantener la infraestructura en buen estado de salud. El mantenimiento regular aumenta la confiabilidad del hardware, asegura operaciones confiables y extiende la vida útil general del hardware. A largo plazo, el mantenimiento reduce el costo total de propiedad (TCO) del sistema. Las actividades de mantenimiento de hardware incluyen servicios regulares de servidores, limpieza de componentes, realización de copias de seguridad de discos y bases de datos, actualización del hardware de forma periódica en función de las necesidades comerciales, etc. existen tres tipos de mantenimiento: el preventivo, el correctivo y mantenimiento perfecto.
 
 c) Best practices
 
@@ -185,30 +186,31 @@ La alta disponibilidad es una factor esencial para las aplicaciones de misión c
 
 los principios claves de la alta disponibilidad, varían de un escenario a otro, algunas de las cualidades esenciales son:
 
-La arquitectura HA debe satisfacer los acuerdos de nivel de servicio de disponibilidad (SLA).
-• La arquitectura de alta disponibilidad debe admitir conmutación por error y recuperación, transparente para el usuario final sin pérdida de datos.
-• La arquitectura HA debe incluir una estrategia de monitoreo proactiva para permitir la autodetección y la autocorrección.
-• La arquitectura HA debe proporcionar una estrategia integral para el manejo del tiempo de inactividad planificado y no planificado.
-• La arquitectura HA debe comprender estrategias para manejar todos los posibles puntos de falla. entre otros.
+* La arquitectura HA debe satisfacer los acuerdos de nivel de servicio de disponibilidad (SLA).
+* La arquitectura de alta disponibilidad debe admitir conmutación por error y recuperación, transparente para el usuario final sin pérdida de datos.
+* La arquitectura HA debe incluir una estrategia de monitoreo proactiva para permitir la autodetección y la autocorrección.
+* La arquitectura HA debe proporcionar una estrategia integral para el manejo del tiempo de inactividad planificado y no planificado.
+* La arquitectura HA debe comprender estrategias para manejar todos los posibles puntos de falla. entre otros.
 
 las motivaciones para la alta disponibilidad están relacionadas con el negocio, alta disponibilidad es sinonimo en ingresos comerciales y ventaja competitiva. algunas claves destacadas son:
 
 Minimice cualquier pérdida debido a tiempo de inactividad e interrupciones
-• Asegurar la continuidad del negocio en caso de desastre natural o circunstancias imprevistas
-• Minimice la pérdida de material evitando y minimizando la pérdida de datos / información
-• Mejore la satisfacción y lealtad del usuario mediante la máxima disponibilidad de funciones, procesos y servicios críticos para el negocio
-• Obtener una ventaja competitiva a través de la máxima disponibilidad de software y servicios
-• Cumplir con las leyes y regulaciones en dominios tales como el cuidado de la salud y aplicaciones de misión crítica
-• Cumplir con los SLA de servicio prometidos a los clientes. entre otros.
+
+* Asegurar la continuidad del negocio en caso de desastre natural o circunstancias imprevistas
+* Minimice la pérdida de material evitando y minimizando la pérdida de datos / información
+* Mejore la satisfacción y lealtad del usuario mediante la máxima disponibilidad de funciones, procesos y servicios críticos para el negocio
+* Obtener una ventaja competitiva a través de la máxima disponibilidad de software y servicios
+* Cumplir con las leyes y regulaciones en dominios tales como el cuidado de la salud y aplicaciones de misión crítica
+* Cumplir con los SLA de servicio prometidos a los clientes. entre otros.
 
 la planificación de alta disponibilidad tiene ciertas características, La planificación de HA comienza con el negocio analizando los requisitos de disponibilidad para el negocio y evaluando el impacto global del tiempo de inactividad en el negocio. En esta etapa, la empresa identifica la funcionalidad del software, el proceso comercial, las transacciones y las páginas que son fundamentales para la continuidad y el éxito del negocio.
 Una vez que se identifica el impacto comercial, la empresa especifica el SLA de rendimiento para la disponibilidad. Por ejemplo, un SLA de disponibilidad de 99.999% (a menudo denominado "cinco nueves") se traduce en un período de tiempo máximo permitido de 5 min del sistema general por año. Las métricas específicas del negocio, como el Objetivo de tiempo de recuperación (RTO) y el Objetivo del punto de recuperación (RPO), a menudo se utilizan como base para llegar a los acuerdos de niveles de servicio (SLA) de disponibilidad.
 El resultado final de la planificación empresarial resulta en la identificación de Indicadores de rendimiento clave de disponibilidad, tales como:
 
-• Disponibilidad SLA
-• Funciones, transacciones y procesos críticos para el negocio
-• Copia de seguridad de datos y archivo SLA
-• Límites de tiempo de inactividad tolerable. entre otros.
+* Disponibilidad SLA
+* Funciones, transacciones y procesos críticos para el negocio
+* Copia de seguridad de datos y archivo SLA
+* Límites de tiempo de inactividad tolerable. entre otros.
 
 Los desafios de la alta disponibilidad, es imprescindible identificar todos los desafios comunes para la alta disponibilidad. pero mencionamos algunos:
 
@@ -241,39 +243,45 @@ Rendimiento: Optimizing Performance of Enterprise Web Application
 
 El rendimiento de una aplicación ya sea web o nativa es uno de los factores de éxito de la misma, como lo es la velocidad de respuesta y la adaptación a diferentes plataforma de aquella aplicación. una aplicación web con un rendimiento excelente puede incrementar la cantidad de peticiones simultáneas de los usuarios, dando una mejor experiencia de usuario y siendo una aplicación competitiva y destacada en el mundo comercial, logrando impactar en un mundo de negocios y muy competitivo. Este tipo de mejoras se pueden llevar a cabo desde el proceso arquitectónico, ya sea por medio del mejoramiento de las distintas capas de software como de un aumento en la capacidad de cómputo desde la parte del hardware, con la realización de una escalamiento vertical o horizontal.
 El rendimiento de una aplicación no es considerada como un requisito funcional, más sin embargo puede generar un gran impacto de dicha aplicación, siendo los siguientes los más sobresalientes.
-• Ventaja Competitiva: Una página web con un bajo rendimiento que conlleve a una alta latencia, implica una decadencia en la cantidad de usuarios y pérdida de competitividad
-• Experiencia de Usuarios: Un mejor velocidad de respuesta es un factor determinante a la hora de ser acogida por los usuarios, siendo un factor de alto impacto y de mucha influencia.
-• Uso del Sitio: Una mejor experiencia de usuario implicaría un aumento de los mismo conectados en simultáneos, logrando una mejor posición en la categorización de los diferentes motores de búsqueda.
-• Impacto Financiero: Un aumento de disminución de los usuarios en una plataforma web, sería uno de los principales factores que lograrían el éxito o fracaso económico de la misma.
+
+* Ventaja Competitiva: Una página web con un bajo rendimiento que conlleve a una alta latencia, implica una decadencia en la cantidad de usuarios y pérdida de competitividad
+* Experiencia de Usuarios: Un mejor velocidad de respuesta es un factor determinante a la hora de ser acogida por los usuarios, siendo un factor de alto impacto y de mucha influencia.
+* Uso del Sitio: Una mejor experiencia de usuario implicaría un aumento de los mismo conectados en simultáneos, logrando una mejor posición en la categorización de los diferentes motores de búsqueda.
+* Impacto Financiero: Un aumento de disminución de los usuarios en una plataforma web, sería uno de los principales factores que lograrían el éxito o fracaso económico de la misma.
 Existen numerosos actos o errores en el diseño arquitectónico y programación de una plataforma web que conllevan a su fracaso, en donde particularmente resaltan los siguientes.
-•Añadir componentes pesados tal como artilugios innecesarios que afecten el rendimiento o el tiempo de carga.
-•Implementar plantillas con largas líneas de código “pesado”, las cuales contienen numerosas modificaciones de diseño en CSS, JS o ficheros de imágenes, aumentando el tiempo de respuesta o en su defecto la latencia.
-•Integración en conjunto con servicios de terceros, siendo esto un factor de gran impacto a la hora de cargar y desplazarse por la página correctamente.
-•Poco uso de recursos no comprimidos y peticiones HTTP poco estructuradas, junto con peticiones al servidor no optimizadas.
+* Añadir componentes pesados tal como artilugios innecesarios que afecten el rendimiento o el tiempo de carga.
+* Implementar plantillas con largas líneas de código “pesado”, las cuales contienen numerosas modificaciones de diseño en CSS, JS o ficheros de imágenes, aumentando el tiempo de respuesta o en su defecto la latencia.
+* Integración en conjunto con servicios de terceros, siendo esto un factor de gran impacto a la hora de cargar y desplazarse por la página correctamente.
+* Poco uso de recursos no comprimidos y peticiones HTTP poco estructuradas, junto con peticiones al servidor no optimizadas.
 
 Una estrategia integral de optimización del rendimiento debe adoptar las siguientes pautas de diseño:
-•Almacenamiento en Caché: Un buen manejo de la caché es una estrategia de éxito cuando de optimización de rendimiento se trata. Almacenar cada uno de los componentes de alto consumo o los cuales de requeridos con mucha frecuencia en caché puede implicar un mejoramiento en el tiempo de respuesta de la aplicación, acelerando cada una de la funcionalidades.
-•Diseño para el fracaso: Desarrollar una aplicación teniendo en cuenta cada uno de los posibles factores de fallos, como fallas en el hardware, desastres naturales, ataques de seguridad, fallas en la operación, entre otro, puede llegar a ser un factor determinante sobre la aplicación resultante, ya que se pueden realizar optimizaciones durante el diseño arquitectónicos, como la implementación de la misma con altos estándares de calidad y con componentes poco propensos a errores.
-•Computación paralela y distribuida: La implementación de un software diseñado para computación paralela o distribuida puede mejorar el rendimiento de la misma, debido a que esta tiene la capacidad por naturaleza de hacer uso de dos o más nodos de cómputo para cada una de sus funciones.
-•Plataforma Liviana: Los componentes esenciales la aplicación como tal debería diseñarse y desarrollarse manteniendo una arquitectura liviana de poco consumo, reduciendo la cantidad de recursos requerida y minimizando la redundancia en los servicios. El uso de una arquitectura liviana y asíncrona, la implementación de artilugios ligeros, y el uso de una programación eficiente reducirán el impacto de la aplicación sobre la arquitectura hardware.
-•Solicitudes Asíncronas y Procesos no Bloqueantes: Ya sean componentes del lado del cliente o para comunicarse con el servidor o para la agregación de datos, intente aprovechar el enfoque basado en AJAX. Esto mejora drásticamente el tiempo de carga de la página percibida y proporciona una carga de la página sin bloqueo.
+
+* Almacenamiento en Caché: Un buen manejo de la caché es una estrategia de éxito cuando de optimización de rendimiento se trata. Almacenar cada uno de los componentes de alto consumo o los cuales de requeridos con mucha frecuencia en caché puede implicar un mejoramiento en el tiempo de respuesta de la aplicación, acelerando cada una de la funcionalidades.
+* Diseño para el fracaso: Desarrollar una aplicación teniendo en cuenta cada uno de los posibles factores de fallos, como fallas en el hardware, desastres naturales, ataques de seguridad, fallas en la operación, entre otro, puede llegar a ser un factor determinante sobre la aplicación resultante, ya que se pueden realizar optimizaciones durante el diseño arquitectónicos, como la implementación de la misma con altos estándares de calidad y con componentes poco propensos a errores.
+* Computación paralela y distribuida: La implementación de un software diseñado para computación paralela o distribuida puede mejorar el rendimiento de la misma, debido a que esta tiene la capacidad por naturaleza de hacer uso de dos o más nodos de cómputo para cada una de sus funciones.
+* Plataforma Liviana: Los componentes esenciales la aplicación como tal debería diseñarse y desarrollarse manteniendo una arquitectura liviana de poco consumo, reduciendo la cantidad de recursos requerida y minimizando la redundancia en los servicios. El uso de una arquitectura liviana y asíncrona, la implementación de artilugios ligeros, y el uso de una programación eficiente reducirán el impacto de la aplicación sobre la arquitectura hardware.
+* Solicitudes Asíncronas y Procesos no Bloqueantes: Ya sean componentes del lado del cliente o para comunicarse con el servidor o para la agregación de datos, intente aprovechar el enfoque basado en AJAX. Esto mejora drásticamente el tiempo de carga de la página percibida y proporciona una carga de la página sin bloqueo.
 
 
-La mayoría de los desarrollos de software a la hora de hacer implementaciones en vista del rendimiento, comenten algunos errores anti-patrones como los siguientes.   
+La mayoría de los desarrollos de software a la hora de hacer implementaciones en vista del rendimiento, comenten algunos errores anti-patrones como los siguientes.
+
 A nivel de la infraestructura (Hardware)
-•Hacer un uso no planificado de la capacidad del hardware, junto con un flujo de datos mayor al establecido.
-•Realizar pruebas con sobrecargas y de capacidad al sistema poco realistas y sin números reales de rendimiento.
-•Abstenerse o hacer un monitoreo en tiempo real poco extensivo de las notificaciones de la infraestructura.
+
+* Hacer un uso no planificado de la capacidad del hardware, junto con un flujo de datos mayor al establecido.
+* Realizar pruebas con sobrecargas y de capacidad al sistema poco realistas y sin números reales de rendimiento.
+* Abstenerse o hacer un monitoreo en tiempo real poco extensivo de las notificaciones de la infraestructura.
 
 A nivel de la aplicación (Software)
-•Realizar servicios de comunicación con peticiones síncronas
-•La no realización de las correspondientes pruebas de los diferentes escenarios
-•No hacer uso de la lista de mejoras en el rendimiento a la hora del diseño e implementación de la aplicación.
-•No adoptar "rendimiento por diseño" y considerar el rendimiento solo como una ocurrencia tardía.
-•Realizar integración con servicios de terceros o con artilugios sin las correspondientes pruebas en el rendimiento y eficiencia.
-•Realizar pruebas en el desempeño durante el final de la pruebas de respuesta.
-•Diseño básico o la abstención a la hora de hacer uso adecuado del caché
-•No realizar pruebas junto con un usuario final.
+
+* Realizar servicios de comunicación con peticiones síncronas
+* La no realización de las correspondientes pruebas de los diferentes escenarios
+* No hacer uso de la lista de mejoras en el rendimiento a la hora del diseño e implementación de la aplicación.
+* No adoptar "rendimiento por diseño" y considerar el rendimiento solo como una ocurrencia tardía.
+* Realizar integración con servicios de terceros o con artilugios sin las correspondientes pruebas en el rendimiento y eficiencia.
+* Realizar pruebas en el desempeño durante el final de la pruebas de respuesta.
+* Diseño básico o la abstención a la hora de hacer uso adecuado del caché
+* No realizar pruebas junto con un usuario final.
 
 A nivel de procesos
-•La inexistencia de un proceso de gobernanza del desempeño.
+
+* La inexistencia de un proceso de gobernanza del desempeñ
