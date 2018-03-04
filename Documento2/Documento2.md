@@ -57,6 +57,21 @@ Ambiente: El sistema puede estar en varios modos operativos, como normal, emerge
 Respuesta: El sistema debe procesar los eventos que llegan. Esto puede causar un cambio en el entorno del sistema (por ejemplo, del modo normal al modo de sobrecarga).
 Medida de respuesta: Las medidas de respuesta son el tiempo que toma procesar los eventos que llegan (latencia o una fecha límite), la variación en este momento (jitter), la cantidad de eventos que pueden procesarse dentro de un intervalo de tiempo particular (rendimiento) o una caracterización de los eventos que no pueden ser procesados (tasa de error).
 
+SEGURIDAD
+
+Elemento clave para la aplicacion, que proeveera de  un profundo impacto en el desarrollo de la misma,
+debido a que se detectan posibles fallos en como se maneja y translada informacion y asi disminuir las
+posibilidades de que agentes malintencionados accedan a informacion sensible 
+
+Fuente de estimulo: Individuo o sistema dentro o fuera de la organizacion. 
+Estimulo: Acceder a informacion sensible o sin permisos.
+Artefacto: Servicios , datos, componentes , recursos que utilice el sistema.
+Ambiente: Ya sea de desarrollo , de produccion, de testeo , es decir en cualquiera de las etapas que se interactue con la aplicación
+Respuesta: Transacciones que no se estan llevando a cabo correcatamente (ejemplo: accerder a datos sin una llave generada , es decir api key)
+Contra Respuesta: Que tanto me demoro en informar, bloquear o manejar el ataque y como este reacciona en mi sistema 
+
+
+
 
 3. Diseño: En Aplicación y en Sistema. a. Vistas de arquitectura. b. Patrones de arquitectura. c. Best Practices. d. Tácticas. e. Herramientas
 
@@ -95,6 +110,29 @@ Adoptar pruebas de regresión y seguridad continuas para descubrir cualquier def
 Maximización de la automatización para actividades de mantenimiento como parches, actualizaciones de software / aplicaciones, etc.
 Cree rutinas automáticas para el manejo de errores usando código de error, lo que ayuda a una recuperación de errores más rápida.
 Probar todos los posibles escenarios de disponibilidad y verificar los SLA.
+
+Relacionadas a seguridad
+
+*  CSRF(Cross-Site Request Forgery: ataque que fuerza a ejecutar acciones indeseadas en aplicaciones web),
+    * Intercambio de tokens cada request y response (tokens de encryptacion)
+    * CAPTCHA: previene ataques automaticos
+    * Filtros web mediante http y restringir el acceso a los servidores
+
+*  Manejos de cuenta:
+    * Dividir roles y permitir el acceso solo a funcionalidades minimas.
+    * Remover log in anonimo en produccion.
+    * Monitoriar los intentos de log in , y aumentar la compeljidad para acceder a la misma
+
+*  Manejo de datos
+    * restringir el acceso de acuerdo a los diferentes roles
+    * Datos sensibles encriptados
+    * Back up periodico
+
+* Manejo de sesiones
+    * Sesion unica, no permitir multiples sesiones.
+    * tiempos limites de ausencia
+    * No guardar datos sensibles en cookies
+    * eliminar el uso de cookies permanentes
 
 d) Tácticas
 
@@ -158,9 +196,30 @@ Predictive model: Un modelo predictivo, cuando se combina con un monitor, se emp
 
 Exception prevention: Prevención de excepciones. Esta táctica se refiere a las técnicas empleadas con el fin de evitar que se produzcan excepciones al sistema. El uso de clases de excepción, que permite que un sistema se recupere de forma transparente de las excepciones del sistema
 
+
+
+* Seguridad
+    * Detectar ataques
+        * Intruso: Comportamientos inadecuados  en protocolos, bases de datos, puertos , entre otros
+        * Servicio : Bloquear trafico entrante de la red
+        * Integridad del mensaje: Checksum u otros mecanismos que detecten que el mensaje que originalmente fue enviado sea el mismo que recibo.
+        * Demora del mensaje: (man-in-the-middle attacks),
+    * Resitir Ataques
+        * Identificacion, autorizacion y autenticacion de autores.
+        * Acceso limitado.
+        * encriptacion de datos.
+        * Modificar configuraciones por default
+    * Reaccionar a ataques
+        * Remover acceso: si el sistema detecta que un ataque esta en camino bloquear a todos los recursos a los cuales se pueda acceder
+        * Bloqueo de maquina: Muchos intentos fallidos de login , pueden ser un potencial ataque, entonces bloquear el acceso desde esa maquina
+        * informar a los actores: tomar acciones sobre el personal que pueda ser afectado por el ataque 
+        y comunicarles la situacion.
+    * Recuperarse de los ataques
+        * Reastaurar el servicion una vez se neutralize el ataque
+
 e. Herramientas
 
-Despliegue del proyecto: Ubuntu 16.04
+Despliegue del proyecto: Ubuntu 16.04, CentOs 7.*, Heroku.
 Framework: npm y node
 Base de datos: MongoDB
 Web server: Apache
