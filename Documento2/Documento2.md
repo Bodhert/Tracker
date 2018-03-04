@@ -215,7 +215,7 @@ Exception prevention: Prevención de excepciones. Esta táctica se refiere a las
         * informar a los actores: tomar acciones sobre el personal que pueda ser afectado por el ataque 
         y comunicarles la situacion.
     * Recuperarse de los ataques
-        * Reastaurar el servicion una vez se neutralize el ataque
+        * Reastaurar el servicio una vez se neutralize el ataque
 
 e. Herramientas
 
