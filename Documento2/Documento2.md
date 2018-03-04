@@ -57,18 +57,17 @@ Ambiente: El sistema puede estar en varios modos operativos, como normal, emerge
 Respuesta: El sistema debe procesar los eventos que llegan. Esto puede causar un cambio en el entorno del sistema (por ejemplo, del modo normal al modo de sobrecarga).
 Medida de respuesta: Las medidas de respuesta son el tiempo que toma procesar los eventos que llegan (latencia o una fecha límite), la variación en este momento (jitter), la cantidad de eventos que pueden procesarse dentro de un intervalo de tiempo particular (rendimiento) o una caracterización de los eventos que no pueden ser procesados (tasa de error).
 
-SEGURIDAD
+* SEGURIDAD
 
-Elemento clave para la aplicacion, que proeveera de  un profundo impacto en el desarrollo de la misma,
-debido a que se detectan posibles fallos en como se maneja y translada informacion y asi disminuir las
-posibilidades de que agentes malintencionados accedan a informacion sensible 
+    * Elemento clave para la aplicacion, que proeveera de  un profundo impacto en el desarrollo de la misma,
+debido a que se detectan posibles fallos en como se maneja y translada informacion y asi disminuir las posibilidades de que agentes malintencionados accedan a informacion sensible.
 
-Fuente de estimulo: Individuo o sistema dentro o fuera de la organizacion. 
-Estimulo: Acceder a informacion sensible o sin permisos.
-Artefacto: Servicios , datos, componentes , recursos que utilice el sistema.
-Ambiente: Ya sea de desarrollo , de produccion, de testeo , es decir en cualquiera de las etapas que se interactue con la aplicación
-Respuesta: Transacciones que no se estan llevando a cabo correcatamente (ejemplo: accerder a datos sin una llave generada , es decir api key)
-Contra Respuesta: Que tanto me demoro en informar, bloquear o manejar el ataque y como este reacciona en mi sistema 
+        * Fuente de estimulo: Individuo o sistema dentro o fuera de la organizacion. 
+        * Estimulo: Acceder a informacion sensible o sin permisos.
+        * Artefacto: Servicios , datos, componentes , recursos que utilice el sistema.
+        * Ambiente: Ya sea de desarrollo , de produccion, de testeo , es decir en cualquiera de las etapas que se interactue con la aplicación
+        * Respuesta: Transacciones que no se estan llevando a cabo correcatamente (ejemplo: accerder a datos sin una llave generada , es decir api key)
+        * Contra Respuesta: Que tanto me demoro en informar, bloquear o manejar el ataque y como este reacciona en mi sistema 
 
 
 
