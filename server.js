@@ -24,6 +24,44 @@ app.use(methodOverride());
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
+var routes = require('./api/routes/todoListRoutes'); //importing route
+
+// auth0 setUp
+const passport = require('passport');
+const Auth0Strategy = require('passport-auth0');
+const user = require('./api/routes/user'); // user routes
+
+
+// Configure Passport to use Auth0
+const strategy = new Auth0Strategy(
+  {
+    domain: 'encotralo.auth0.com',
+    clientID: 'z0Zb7H0Obn3aNnPsRlCjo0mJWWNXlmfk',
+    clientSecret: 'mD3v50-F8Ex4vv888LZvC4Oz710_lSj9aKZ28ZKI5J1I1hPznEZhsXdyNj8Me-lc',
+    callbackURL: 'http://localhost:3000/callback'
+  },
+  (accessToken, refreshToken, extraParams, profile, done) => {
+    return done(null, profile);
+  }
+);
+
+passport.use(strategy);
+
+// This can be used to keep a smaller payload
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
+// ...
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
 
 
 //calling the page that contains the script for geting latitude and longitud
@@ -56,16 +94,23 @@ db.once('open', function () {
 app.use(session({
   secret: 'work hard',
   resave: true,
-  saveUninitialized: false,
+  saveUninitialized: true,
   store: new MongoStore({
     mongooseConnection: db
   })
 }));
 
+// Check logged in
+app.use(function(req, res, next) {
+  res.locals.loggedIn = false;
+  if (req.session.passport && typeof req.session.passport.user != 'undefined') {
+    res.locals.loggedIn = true;
+  }
+  next();
+});
 
-var routes = require('./api/routes/todoListRoutes'); //importing route
 routes(app); //register the route
-
+user(app); // user routes
 
 app.listen(port);
 
