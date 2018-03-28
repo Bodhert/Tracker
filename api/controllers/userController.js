@@ -1,12 +1,8 @@
 var mongoose = require('mongoose'),
     User = mongoose.model('User');
 
-exports.send_page = function (req, res) {
-    // res.render(__dirname + '/public/login_register/login_register');
-    // I dont know if this is good or bad, cause is vero slow firts to charge
-    res.render('../public/login_register/login_register');
-
-    // console.log(path.join(__dirname + '/templateLogReg/index.html'));
+exports.send_page = function (req, res,next) {
+    res.render('index');
 };
 
 exports.create_user = function (req, res, next) {

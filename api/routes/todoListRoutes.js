@@ -1,8 +1,8 @@
 
     const express = require('express');
-    // var todoList = require('../controllers/todoListController');
-    // var location = require('../controllers/LocationController');
-    // var user = require('../controllers/userController');
+    const todoList = require('../controllers/todoListController');
+    const location = require('../controllers/LocationController');
+    const user = require('../controllers/userController');
     const passport = require('passport');
     const router = express.Router();
     
@@ -30,8 +30,8 @@
     //     res.send('Hello World')
     // });
 
-    // router.route('/gps')
-    //     .get(location.send_page);
+    router.route('/gps')
+        .get(location.send_page);
 
     // router.route('/gps/:username')
     //     .get(location.bring_user_locations);
@@ -45,10 +45,10 @@
     // router.route('/bring_all_locations')
     //     .get(location.lists_all_locations); // list all the locations stored
 
-    // //creates users or log them in , otherwise fails
-    // router.route('/')
-    //     .get(user.send_page)
-    //     .post(user.create_user);
+    //creates users or log them in , otherwise fails
+    router.route('/')
+        .get(user.send_page)
+        .post(user.create_user);
 
     
 
@@ -64,10 +64,6 @@
     // router.route('/current_user')
     //     .get(user.current_user);
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-    res.render('index');
-  });
   
   router.get('/login', passport.authenticate('auth0', {
     clientID: env.AUTH0_CLIENT_ID,

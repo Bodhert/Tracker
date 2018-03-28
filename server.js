@@ -58,7 +58,8 @@ mongoose.Promise = global.Promise;
 const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-// ...
+// app.set('view engine', 'html');
+
 app.use(morgan('dev'));                                         // log every request to the console
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -68,20 +69,19 @@ app.use(
     secret: 'shhhhhhhhh',
     resave: true,
     saveUninitialized: true,
-    store: new MongoStore({ //could be here the error?
+    store: new MongoStore({ 
       mongooseConnection: db
     })
 }));
 app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.session());
-// app.use(express.static(__dirname + '/public'));                 // set the static files location /public/img will be /img for users
+app.use(express.static(__dirname + '/public'));                 // set the static files location /public/img will be /img for users
 // app.use(bodyParser.urlencoded({ 'extended': 'true' }));            // parse application/x-www-form-urlencoded
-// app.use(bodyParser.json());                                     // parse application/json
 // app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 // app.use(methodOverride());
-// app.engine('html', require('ejs').renderFile);
-// app.set('view engine', 'html');
+app.engine('html', require('ejs').renderFile);
+
 
 
 
@@ -109,16 +109,15 @@ db.once('open', function () {
 
 
 // Check logged in
-// app.use(function (req, res, next) {
-//   res.locals.loggedIn = false;
-//   if (req.session.passport && typeof req.session.passport.user != 'undefined') {
-//     res.locals.loggedIn = true;
-//   }
-//   next();
-// });
+app.use(function (req, res, next) {
+  res.locals.loggedIn = false;
+  if (req.session.passport && typeof req.session.passport.user != 'undefined') {
+    res.locals.loggedIn = true;
+  }
+  next();
+});
 
-// routes(app); //register the route
-// user(app); // user routes
+
 
 app.use('/', routes);
 app.use('/user', user);

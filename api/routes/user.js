@@ -3,11 +3,10 @@ const passport = require('passport');
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
 const router = express.Router();
 
-console.log("cargo user 1");
 
 /* GET user profile. */
 router.get('/', ensureLoggedIn, function (req, res, next) { // the bug is in ensuredLoggedIn
-    res.render('user', {
+    res.render('', {
         user: req.user,
         userProfile: JSON.stringify(req.user, null, '  ')
     });
