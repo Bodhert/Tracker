@@ -33,12 +33,12 @@
     router.route('/gps')
         .get(location.send_page);
 
-    // router.route('/gps/:username')
-    //     .get(location.bring_user_locations);
+    router.route('/gps/:username')
+        .get(location.bring_user_locations);
 
-    // //saves the coordinates 
-    // router.route('/save_location')
-    //     .post(location.create_a_location); //create location 
+    //saves the coordinates 
+    router.route('/save_location')
+        .post(location.create_a_location); //create location 
 
 
     // //brings all the locations
