@@ -86,7 +86,6 @@
       failureRedirect: '/failure'
     }),
     function(req, res) {
-      console.log(req.session.returnTo);
       res.redirect( '/user');
     }
   );

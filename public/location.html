@@ -72,7 +72,7 @@
 
 
         function call_current_user() {
-            $.get("/current_user", function (data) {
+            $.get("user/current_user", function (data) {
                 // alert("Data Loaded: " + data); //uncomment this line for debbuging
                 if (data) current_user = data;
             });
@@ -112,7 +112,7 @@
 
             // this have to be this way cause jquery is done in asyncronous way
             // so if I separe the queries will not work.
-            $.get("/current_user", function (data_user) {
+            $.get("user/current_user", function (data_user) {
                 // alert("Data Loaded: adentro " + data_user); //uncomment this line for debbuging
                 current_user = data_user;
                 $.get("/gps/" + current_user, function (data) { // the problem is here , i do not how to store the result in this variable
@@ -146,7 +146,7 @@
 
         function call_current_user() {
             var ans;
-            $.get("/current_user", function (data) {
+            $.get("user/current_user", function (data) {
                 alert("Data Loaded: adentro " + data); //uncomment this line for debbuging
                 current_user = data;
             });
