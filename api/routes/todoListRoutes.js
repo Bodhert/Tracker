@@ -2,7 +2,6 @@
     const express = require('express');
     const todoList = require('../controllers/todoListController');
     const location = require('../controllers/LocationController');
-    const user = require('../controllers/userController');
     const passport = require('passport');
     const router = express.Router();
     
@@ -45,24 +44,10 @@
     // router.route('/bring_all_locations')
     //     .get(location.lists_all_locations); // list all the locations stored
 
-    //creates users or log them in , otherwise fails
-    router.route('/')
-        .get(user.send_page)
-        .post(user.create_user);
-
-    
-
-    // //gets the profile of the user
-    // router.route('/_profile')
-    //     .get(user._profile);
-
-    // // log you out of the session
-    // router.route('/logout')
-    //     .get(user.logout);
-
-    // //brings the name of the current user
-    // router.route('/current_user')
-    //     .get(user.current_user);
+    //get gome page
+    router.get('/', function(req, res, next) {
+      res.render('index');
+    });
 
   
   router.get('/login', passport.authenticate('auth0', {

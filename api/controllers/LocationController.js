@@ -1,4 +1,4 @@
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
     Location = mongoose.model('Locations');
 
 //creates a location
@@ -21,7 +21,7 @@ exports.lists_all_locations = function (req, res) {
 
 //bring all the locations of one user
 exports.bring_user_locations = function (req, res) {
-    Location.find({username: req.params.username}, function (err, locations) {
+    Location.find({ username: req.params.username }, function (err, locations) {
         if (err)
             res.send(err);
         res.json(locations);
@@ -33,5 +33,9 @@ exports.send_page = function (req, res) {
     // I dont know if this is good or bad, cause is vero slow firts to charge
     res.render('../public/location.html');
     // console.log(req.session.userId);
-    
+
+};
+
+exports.already_exists = function (req, res) {
+
 };

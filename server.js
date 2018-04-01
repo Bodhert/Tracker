@@ -19,6 +19,9 @@ const user = require('./api/routes/user'); // user routes
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const flash = require('connect-flash');
+const jwt = require('express-jwt');
+const jwks = require('jwks-rsa');
+
 
 
 dotenv.load();
@@ -38,6 +41,18 @@ const strategy = new Auth0Strategy(
     return done(null, profile);
   }
 );
+
+// const jwtCheck = jwt({
+//   secret: jwks.expressJwtSecret({
+//       cache: true,
+//       rateLimit: true,
+//       jwksRequestsPerMinute: 5,
+//       jwksUri: "https://encotralo.auth0.com/.well-known/jwks.json"
+//   }),
+//   audience: 'https://proyecto_1_telematica_tracker',
+//   issuer: "https://encotralo.auth0.com/",
+//   algorithms: ['RS256']
+// });
 
 passport.use(strategy);
 
@@ -83,6 +98,7 @@ app.use(bodyParser.urlencoded({ 'extended': 'true' }));            // parse appl
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 app.use(flash());
+// app.use(jwtCheck);
 
 
 
@@ -126,6 +142,10 @@ app.use(function (req, res, next) {
 
 app.use('/', routes);
 app.use('/user', user);
+
+// app.get('/authorized', function (req, res) {
+//   res.send('Secured Resource');
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
