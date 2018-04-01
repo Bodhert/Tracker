@@ -13,6 +13,9 @@
     "url": "https://github.com/Bodhert/Tracker/issues"
   },
   "homepage": "https://github.com/Bodhert/Tracker#readme",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "auth0-js": "^9.3.3",
     "bcrypt": "^1.0.3",

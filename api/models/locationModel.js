@@ -6,8 +6,8 @@ var Schema = mongoose.Schema;
 var LocationSchema = new Schema(
     {
         username: String,
-        latitude: Number,
-        longitude: Number,
+        latitude: String,
+        longitude: String,
         Created_date:
             {
                 type: Date,
