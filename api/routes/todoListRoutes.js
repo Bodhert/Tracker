@@ -56,7 +56,7 @@
     redirectUri: env.AUTH0_CALLBACK_URL,
     responseType: 'code',
     audience: 'https://' + env.AUTH0_DOMAIN + '/userinfo',
-    scope: 'openid profile'}),
+    scope: 'openid email profile'}),
     function(req, res) {
       res.redirect("/");
   });

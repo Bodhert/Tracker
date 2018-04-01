@@ -3,12 +3,38 @@ const mongoose = require('mongoose'),
 
 //creates a location
 exports.create_a_location = function (req, res) {
+    console.log(req.body.username + " " + req.body.latitude + " " + req.body.longitude );
     var new_location = new Location(req.body);
-    new_location.save(function (err, location) {
-        if (err)
-            res.send(err);
-        res.json(location);
+    Location.find({
+        'username': req.body.username,
+        'latitude': req.body.latitude,
+        'longitude': req.body.longitude
+    }).exec(function (error, location) {
+        if (error) {
+            // return next(error);
+            console.log(error);
+        }
+        else {
+            // console.log("else location");
+
+            // console.log(location);
+            // console.log(typeof(location));    
+            if (location.length == 0) {
+                console.log("no existe la locacion");
+                new_location.save(function (err, location) {
+                    if (err)
+                        res.send(err);
+                    res.json(location);
+                });
+            } else console.log("jijij");
+        }
     });
+
+    // new_location.save(function (err, location) {
+    //     if (err)
+    //         res.send(err);
+    //     res.json(location);
+    // });
 };
 
 // brings all the locations stored in the db

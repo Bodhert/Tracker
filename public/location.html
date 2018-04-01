@@ -81,8 +81,7 @@
 
 
     <div id="map"></div>
-    <script> 
-
+    <script>
         // call_current_user();
         // this method could be optimezed, just calling it once!!!
 
@@ -121,7 +120,7 @@
                     for (var key in data) {
                         if (data[key].latitude && data[key].longitude) { // checking for non existent values
 
-                            var coordinates = { lat: data[key].latitude, lng: data[key].longitude };
+                            var coordinates = { lat:  parseFloat(data[key].latitude),  lng: parseFloat(data[key].longitude)  };
                             var marker = new google.maps.Marker({
                                 position: coordinates,
                                 map: map,

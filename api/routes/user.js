@@ -9,7 +9,8 @@ const User = mongoose.model('User');
 /* GET user profile. */
 router.get('/', ensureLoggedIn, function (req, res, next) {
 
-    User.findOne({'username' : req.user.name.givenName})
+    console.log(req.user.emails[0].value);
+    User.findOne({'username' : req.user.emails[0].value})
         .exec(function (error, user) {
             if (error) {
                 // return next(error);
@@ -19,7 +20,7 @@ router.get('/', ensureLoggedIn, function (req, res, next) {
                 console.log("hola");
                 if (user === null) {
                     var userData = {
-                        username: req.user.name.givenName,
+                        username: req.user.emails[0].value,
                     }
                     User.create(userData, function (error, user) {
                         if (error) {
@@ -32,7 +33,7 @@ router.get('/', ensureLoggedIn, function (req, res, next) {
             }
         });
 
-    console.log("hola2");
+    // console.log("hola2");
     res.render('user', {
         user: req.user,
         userProfile: JSON.stringify(req.user, null, '  ')
@@ -40,7 +41,7 @@ router.get('/', ensureLoggedIn, function (req, res, next) {
 });
 
 router.get('/current_user', ensureLoggedIn, function (req, res, next) {
-    res.send(req.user.name.givenName);
+    res.send(req.user.emails[0].value);
 });
 
 
