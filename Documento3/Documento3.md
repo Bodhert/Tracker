@@ -62,7 +62,7 @@
 ![Vista de despliegue](despliegue.png)
 
 
-ii) [url privada ](http://10.131.137.150:80)
+ii) [url privada ](http://10.131.137.154:3000)
 
 
 
