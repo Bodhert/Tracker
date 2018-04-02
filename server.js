@@ -65,8 +65,8 @@ passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 
-var current_db = 'mongodb://localhost/testDb'; // for local test
-// var current_db = 'mongodb://bodhert:123456@ds239368.mlab.com:39368/tracker'; //for deployment
+// var current_db = 'mongodb://localhost/testDb'; // for local test
+var current_db = 'mongodb://bodhert:123456@ds239368.mlab.com:39368/tracker'; //for deployment
 mongoose.connect(current_db);
 var db = mongoose.connection;
 mongoose.Promise = global.Promise;
