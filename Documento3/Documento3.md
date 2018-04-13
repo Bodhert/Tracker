@@ -62,7 +62,7 @@
 ![Vista de despliegue](despliegue.png)
 
 
-ii) [url privada ](http://10.131.137.154:3000)
+ii) [url privada ](http://10.131.137.154:3000   )
 
 
 
@@ -77,12 +77,230 @@ Rendimiento
 
 Seguridad
 
-• single sign on con auth0, es decir ya no se manejan los usuarios si no que mediante una api segura se
-guardan los usuarios
+• single sign on con auth0, es decir ya no se manejan los usuarios si no que mediante una api segura se guardan los usuarios.
 
+
+Instrucciones
+
+Instalar las dependencias del middleware
+```
+npm install passport passport-auth0 connect-ensure-login --save
+```
+
+Luego , se importan las dependencias necesarias en la instancia principal de la aplicacion , todas las  `variables terminadas en AUTH0`  reemplazarlas por las credenciales que te brinde
+[AUTH0](https://auth0.com/)
+```javascript
+
+// app.js
+
+const passport = require('passport');
+const Auth0Strategy = require('passport-auth0');
+
+// Configure Passport to use Auth0
+const strategy = new Auth0Strategy(
+  {
+    domain: 'DOMINIO_AUTH0',
+    clientID: 'ID_CLIENTE_AUTH0',
+    clientSecret: 'CLIENT_SECRET_AUTH0',
+    callbackURL: 'http://localhost:3000/callback' // si es local , si no a la pagina que desee redireccionar
+  },
+  (accessToken, refreshToken, extraParams, profile, done) => {
+    return done(null, profile);
+  }
+);
+
+passport.use(strategy);
+
+// This can be used to keep a smaller payload
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
+// ...
+app.use(passport.initialize());
+app.use(passport.session());
+```
+
+Deberia salirte algo como esto 
+![Auth0](hosted-login.png)
+
+
+Luego donde manejas tus rutas añade el siguiente codigo
+
+```javascript
+router.get(
+  '/login',
+  passport.authenticate('auth0', {
+    clientID: env.AUTH0_CLIENT_ID,
+    domain: env.AUTH0_DOMAIN,
+    redirectUri: env.AUTH0_CALLBACK_URL,
+    audience: 'https://' + env.AUTH0_DOMAIN + '/userinfo',
+    responseType: 'code',
+    scope: 'openid profile'
+  }),
+  function(req, res) {
+    res.redirect('/');
+  }
+);
+```
+Ahora en donde manejes los usuarios copia el siguiente segmento
+```javascript
+router.get('/', ensureLoggedIn, function(req, res, next) {
+  res.render('user', {  // a esta pagina mandas la informacion del usurio, ya depende de ti 
+    user: req.user,     //como tengas organizado las vistas
+    userProfile: JSON.stringify(req.user, null, '  ')
+  });
+});
+```
 • certificado local https.
+ 
+ Antes de hacer esto debemos aseguranos de tener Nginx en Nuestra CentoOs 7
 
-• jwt , mediante auth0
+ Primero añadimos los paquetes
+ ```
+ $sudo yum install epel-release
+ ```
+
+
+Instalamos nginx
+```
+ $sudo yum install nginx
+ ```
+
+Verificamos que el servicio este corriendo 
+ ```
+systemctl status nginx
+
+● nginx.service - The nginx HTTP and reverse proxy server
+   Loaded: loaded (/usr/lib/systemd/system/nginx.service; disabled; vendor preset: disabled)
+   Active: active (running) since Fri 2017-01-06 17:27:50 UTC; 28s ago
+
+. . .
+
+Jan 06 17:27:50 centos-512mb-nyc3-01 systemd[1]: Started The nginx HTTP and reverse proxy server.
+
+ ```
+
+ Queremos que el servicio inicie cuando prendamos la maquina
+ ```
+ $ sudo systemctl enable nginx
+  Created symlink from /etc/systemd/system/multi-user.target.wants/nginx.service to /usr/lib/systemd/system/nginx.service.
+ ```
+
+ Si tenemos el firewall corriendo desactivemoslo
+ ```
+    $sudo firewall-cmd --add-service=http
+    $sudo firewall-cmd --add-service=https
+    $sudo firewall-cmd --runtime-to-permanent
+
+ ```
+
+ Si tienes firewall the tablas ip, añade http, https con los siguientes comandos
+ ```
+    $sudo iptables -I INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+    $sudo iptables -I INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+ ```
+
+ luego creamos el certificado SSL
+
+ Creamos las Carpetas dodne guardaremos los certificados que generaremos
+
+```
+ sudo mkdir /etc/ssl/private
+ sudo chmod 700 /etc/ssl/private
+```
+
+ahora creamos un certificado auto-firmado con OpenSSL, y los guardamos en la carpeta previamente creada con el siguiente comando
+```
+$sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
+```
+
+Saldra una tabla donde nos pedira la siguiente informacion:
+`Common Name` es de suprema importancia debido a que es la ip donde esta alojada la aplicación
+```
+Country Name (2 letter code) [AU]:CO
+State or Province Name (full name) [Some-State]:Antioquia
+Locality Name (eg, city) []:Medellin
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Telematica
+Organizational Unit Name (eg, section) []:Proyecto 2
+Common Name (e.g. server FQDN or YOUR name) []:server_IP_address
+Email Address []:admin@your_domain.com
+```
+
+para garanizar una comunicacion segura con los clientes corremos es siguiente comando:
+```
+sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+```
+
+Ahora configuramos Nginx para que use SSL, en dodne tenemos la configuracion de la aplicacion corriendo
+```
+$sudo emacs /etc/nginx/conf.d/Tracker.conf
+```
+añadimos las siguientes directivas
+```
+server {
+    listen 443 http2 ssl;
+    listen [::]:443 http2 ssl;
+
+    server_name server_IP_address;
+
+    ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+    ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+    ssl_dhparam /etc/ssl/certs/dhparam.pem;
+
+    // configuracio propia de la aplicacion
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+}
+
+```
+
+Probamos que todo este bien con el siguiente comando
+```
+$sudo nginx -t
+```
+si algo nos sale mal , nos dira en que parte nos equivocamos, comunmente es un error de sintaxis
+si no,  saldra el siguiente mensaje
+
+```
+nginx: [warn] "ssl_stapling" ignored, issuer certificate not found
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+```
+
+Reseteamos el servicio
+```
+sudo systemctl restart nginx
+```
+
+Ahora deberiamos poder acceder por 
+```
+https://server_domain_or_IP
+```
+
+como es un certificado auto firmado , el navegador no lo reconoce como seguro , ya que debe de estar firmado por algun provedor autorizado como [lets encript](https://letsencrypt.org/),pero no es problema, podemos proceder con los siguientes pasos.
+
+
+![Advertencia](self_signed_warning.png)
+
+
+![Ingnorar advertencia](warning_override.png)
+
+
+
+
+
 
 Disponibilidad
 
