@@ -68,13 +68,6 @@ ii) [url privada ](http://10.131.137.154:3000   )
 
 3. 
 
-Rendimiento
-
-• Se realizaron pruebas con JMeter a la aplicación antes de ser modificada y sin los atributos de calidad especificados, como a la aplicación una vez implementados cada uno de los QAs. De esta manera se muestra el tiempo de respuesta y cantidad de peticiones por segundo.
-
-• Para el mejoramiento de la capacidad de carga del sistema o de transacciones por segundo se realizó modificaciones sobre la forma como se guardan los datos de las ubicaciones, de tal manera que no guarde información innecesaria como lo sería de la repetición de una ubicación ya guardada previamente.
-
-
 Seguridad
 
 • single sign on con auth0, es decir ya no se manejan los usuarios si no que mediante una api segura se guardan los usuarios.
@@ -298,8 +291,20 @@ como es un certificado auto firmado , el navegador no lo reconoce como seguro , 
 ![Ingnorar advertencia](warning_override.png)
 
 
+Rendimiento
+
+• Se realizaron pruebas con JMeter a la aplicación antes de ser modificada y sin los atributos de calidad especificados, así como a la aplicación una vez implementados cada uno de los QAs. De esta manera se muestra el tiempo de respuesta y cantidad de peticiones por segundo realizados sobre las paginas a cargar por medio de la aplicación.
+
+En la siguiente imagen se puede apreciar el Throughput resultante sobre las pruebas realizadas sobre el Login y la pagina encargada de la interacción con el Mapa, así mismo se puede observar el porcentaje de error, la cantidad de Bytes enviados y recibidos, junto con algunos otros detalles.
+
+![Old 100-1 Segundo](Jmeter/Old/100-1Segundo.png)
+
+Los resultados que se visualizan sobre la prueba de la aplicación una vez realizados las modificaciones respecto a los QAs, evidencian un aumento en el Throughput de la aplicación, lo cual puede parecer una disminución en el rendimiento, mas sin embargo se mantiene no muy por encima del observado en la imagen anterior aún sabiendo que hubo un aumento en la cantidad de Bytes enviados y recibidos, sobre todo en el Login para el cual se hace uso de un tercero encargado de permitir el Log In desde Facebook y Google.
+
+![New 100-1 Segundo](Jmeter/New/100-1Segundo.png)
 
 
+• Para el mejoramiento de la capacidad de carga del sistema o de transacciones por segundo se realizó modificaciones sobre la forma como se guardan los datos de las ubicaciones, de tal manera que no guarde información innecesaria como lo sería de la repetición de una ubicación ya guardada previamente.
 
 
 Disponibilidad
