@@ -305,19 +305,19 @@ Los resultados que se visualizan sobre la prueba de la aplicación una vez reali
 
 Como se puede apreciar en la siguiente imagen la cual muestra el resultado de una prueba realizada sobre la aplicación vieja, ésta muestra la Latencia, el tiempo de conexión, los Bytes transmitidos junto con otros datos. 
 
-![New 100-1 Segundo](Jmeter/Old/2018-04-08 22-55-16.png)
+![Old1](Jmeter/Old/Screenshot23-29-45.png)
 
 La siguiente prueba se realizó sobre la aplicación resultante, en donde se puede avidenciar un aumento en la cantidad de peticiones que se realizaron, siendo ésta de 4000, sabiendo ésto se puede evidenciar que la Latencia resultante se mantuvo no muy por encima de la aplicación original, aunque hubieron alguno casos particulares para los cuales hubo un aumento en la Latencia y en pocos casos algunas peticiones con errores, mas sin embargo ésto se debió al aumento en la cantidad de información transmitida, los niveles de segúridad añadidos junto con el uso de aplicaciones de terceros para complementar los QAs.
 
-![New 100-1 Segundo](Jmeter/New/2018-04-08 22-55-16.png)
+![New1](Jmeter/New/2018-04-08 22-55-16.png)
 
 Información correspondiente a una petición realizada sobre la pagina encargada de la interacción con el mapa, sobre un test de 100 peticiones en 10 segundos.
 
-![New 100-1 Segundo](Jmeter/Old/2018-04-08 23-27-21.png)
+![Old2](Jmeter/Old/Screenshot23-27-21.png)
 
 Información correspondiente a una petición realizada sobre la pagina encargada de la interacción con el mapa, sobre un test de 1000 peticiones en 20 segundos en la nueva aplicación.
 
-![New 100-1 Segundo](Jmeter/New/2018-04-08 23-54-50.png)
+![New2](Jmeter/New/Screenshot23-54-50.png)
 
 • Para el mejoramiento de la capacidad de carga del sistema o de transacciones por segundo se realizó modificaciones sobre la forma como se guardan los datos de las ubicaciones, de tal manera que no guarde información innecesaria como lo sería de la repetición de una ubicación ya guardada previamente.
 
