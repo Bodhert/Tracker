@@ -309,7 +309,7 @@ Como se puede apreciar en la siguiente imagen la cual muestra el resultado de un
 
 La siguiente prueba se realizó sobre la aplicación resultante, en donde se puede avidenciar un aumento en la cantidad de peticiones que se realizaron, siendo ésta de 4000, sabiendo ésto se puede evidenciar que la Latencia resultante se mantuvo no muy por encima de la aplicación original, aunque hubieron alguno casos particulares para los cuales hubo un aumento en la Latencia y en pocos casos algunas peticiones con errores, mas sin embargo ésto se debió al aumento en la cantidad de información transmitida, los niveles de segúridad añadidos junto con el uso de aplicaciones de terceros para complementar los QAs.
 
-![New1](Jmeter/New/2018-04-08 22-55-16.png)
+![New1](Jmeter/New/Screenshot22-55-16.png)
 
 Información correspondiente a una petición realizada sobre la pagina encargada de la interacción con el mapa, sobre un test de 100 peticiones en 10 segundos.
 
