@@ -303,8 +303,26 @@ Los resultados que se visualizan sobre la prueba de la aplicación una vez reali
 
 ![New 100-1 Segundo](Jmeter/New/100-1Segundo.png)
 
+Como se puede apreciar en la siguiente imagen la cual muestra el resultado de una prueba realizada sobre la aplicación vieja, ésta muestra la Latencia, el tiempo de conexión, los Bytes transmitidos junto con otros datos. 
+
+![New 100-1 Segundo](Jmeter/Old/2018-04-08 22-55-16.png)
+
+La siguiente prueba se realizó sobre la aplicación resultante, en donde se puede avidenciar un aumento en la cantidad de peticiones que se realizaron, siendo ésta de 4000, sabiendo ésto se puede evidenciar que la Latencia resultante se mantuvo no muy por encima de la aplicación original, aunque hubieron alguno casos particulares para los cuales hubo un aumento en la Latencia y en pocos casos algunas peticiones con errores, mas sin embargo ésto se debió al aumento en la cantidad de información transmitida, los niveles de segúridad añadidos junto con el uso de aplicaciones de terceros para complementar los QAs.
+
+![New 100-1 Segundo](Jmeter/New/2018-04-08 22-55-16.png)
+
+Información correspondiente a una petición realizada sobre la pagina encargada de la interacción con el mapa, sobre un test de 100 peticiones en 10 segundos.
+
+![New 100-1 Segundo](Jmeter/Old/2018-04-08 23-27-21.png)
+
+Información correspondiente a una petición realizada sobre la pagina encargada de la interacción con el mapa, sobre un test de 1000 peticiones en 20 segundos en la nueva aplicación.
+
+![New 100-1 Segundo](Jmeter/New/2018-04-08 23-54-50.png)
 
 • Para el mejoramiento de la capacidad de carga del sistema o de transacciones por segundo se realizó modificaciones sobre la forma como se guardan los datos de las ubicaciones, de tal manera que no guarde información innecesaria como lo sería de la repetición de una ubicación ya guardada previamente.
+
+• Se realizaron las respectivas modificaciones sobre el fichero de configuración de Nginx para permitir el uso de la última actualización del protocolo de transferencia de hipertexto de red utilizado por la World Wide Web denominado HTTP/2, en donde predomina el uso de una única conexión para ofrecer multiples solicitudes y respuestas en paralelo, aún sabiendo que una pagina Web puede contener objetos HTML, CSS, JavaScript, Imágenes, Vídeo, etc..
+Ademas realizá la eliminación de información redundante, avitando así el envío de datos repetidos durante una misma conexión con mejoras significativas en la latencia, y hace priorización de flujos en donde es fundamental el orden y el retardo con el que las tramas del mensaje HTTP llegan a su destino, mejorando los tiempos de espera y procesamiento.
 
 
 Disponibilidad
