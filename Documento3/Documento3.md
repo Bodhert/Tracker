@@ -327,10 +327,100 @@ Ademas realizá la eliminación de información redundante, avitando así el env
 
 Disponibilidad
 
+• Disponibilidad de las bases de datos.
+
+
+Instalacion de docker en centos7
+
+```
+source: https://docs.docker.com/install/linux/docker-ce/centos/
+
+$ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+$ sudo yum install docker-ce
+$ sudo systemctl start docker
+$ sudo systemctl enable docker
+
+instalar docker-compose: https://docs.docker.com/compose/install/
+
+$ sudo curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+
+$ sudo chmod +x /usr/local/bin/docker-compose
+```
+Se descarga el proyecto de github
+
+```
+$ cd /tmp/
+  $ mkdir apps
+  $ cd apps
+  $ git clone https://github.com/Bodhert/Tracker.git
+  $ cd appwebArticulosNodejs
+```
+se hace la instalacion de los dockers independientes
+
+contenedor de mongo:
+
+```
+  $ docker pull mongo
+```
+contenedor nodejs+app:
+
+```
+  $ docker image build -t ccartag4/gps .
+  $ docker image push ccartag4/gps
+```
+contenedor de nginx:
+
+```
+ $ docker pull nginx
+```
+
+ejecucion de docker-compose
+
+```
+$ docker-compose build
+$ docker-compose up
+```
+
 
 • Balanceador de cargas con ngnx
 
-• Disponibilidad de las bases de datos.
+instalacion de nginx
+
+```
+sudo apt-get install nginx
+```
+
+configuracion sitio web
+
+```
+sudo nano /etc/nginx/sites-available/default
+```
+configuración de equilibrio de carga al archivo.
+
+```
+
+upstream backend  {
+  server backend1.example.com;
+  server backend2.example.com;
+  server backend3.example.com;
+}
+```
+
+referencia del modulo
+
+```
+ server {
+  location / {
+    proxy_pass  http://backend;
+  }
+}
+```
+
+reiniciar nginx
+```
+sudo service nginx restart
+```
+
 
 
 
